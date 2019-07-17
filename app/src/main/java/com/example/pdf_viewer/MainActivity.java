@@ -81,4 +81,47 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public ArrayList<File> getFile(File dir)
+    {
+        File[] listFile = dir.listFiles();
+
+        if(listFile!=null && listFile.length>0)
+        {
+            for(int i=0;i<listFile.length;i++)
+            {
+                if(listFile[i].isDirectory())
+                {
+                    getFile(listFile[i]);
+                }
+                else
+                {
+                    boolean booleanpdf = false;
+                    if(listFile[i].getName().endsWith(".pdf"))
+                    {
+                        for(int j=0;j<filelist.size();j++)
+                        {
+                            if(filelist.get(j).getName().equals(listFile[i].getName()))
+                            {
+                                booleanpdf = true;
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                        if(booleanpdf)
+                        {
+                            booleanpdf = false;
+                        }
+                        else
+                        {
+                            filelist.add(listFile[i]);
+                        }
+                    }
+                }
+            }
+        }
+      return filelist;
+    }
 }
